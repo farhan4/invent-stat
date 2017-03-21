@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock</title>
+    <style>
+        table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+</head>
+<body>
+<table>
+<div align="center">
+<a href="/home/" style="color:blue;"><h1><i>Home</i></h1></a>
+<a href="/" style="color:blue;"><h1><i>Log Out</i></h1></a>
+</div>
+<tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+
+</tr>
+{% for item in items %}
+    <tr>
+        <td>{{ item.pid }} </td>
+        <td>{{ item.pname }}</td>
+        <td>{{ item.quantity }} </td>
+        <td> {{ item.price }} </td>
+{% endfor %}
+</table>
+<br>
+<hr>
+<hr>
+</body>
+</html>

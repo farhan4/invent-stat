@@ -1,0 +1,118 @@
+CREATE TABLE person(
+     id INT NOT NULL AUTO_INCREMENT,
+     firstname VARCHAR(100) NOT NULL DEFAULT 'Unknown',
+     CONSTRAINT fn_check CHECK(firstname NOT LIKE '%[^0-9]%'),
+     middlename VARCHAR(100)  DEFAULT 'Unknown',
+     CONSTRAINT mn_check CHECK(middlename NOT LIKE '%[^0-9]%'),
+     lastname VARCHAR(100) NOT NULL,
+     CONSTRAINT ln_check CHECK(lastname NOT LIKE '%[^0-9]%'),
+     ph_number VARCHAR(10) NOT NULL,
+     CONSTRAINT ph_length  CHECK (ph_number LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' AND LENGTH(ph_number)=10),
+     PRIMARY KEY(id)
+     );
+
+ALTER TABLE person ALTER COLUMN lastname SET DEFAULT 'Unknown';
+ALTER TABLE person AUTO_INCREMENT=1;
+
+
+CREATE TABLE employee(
+     id INT NOT NULL,
+     salary INT NOT NULL,
+     address VARCHAR(200) NOT NULL,
+     dob DATE NOT NULL,
+     PRIMARY KEY(id)
+    );
+
+
+ALTER TABLE employee ADD CONSTRAINT person_id FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE employee ADD CONSTRAINT salary_pos CHECK(salary>0);
+
+
+CREATE TABLE supplier(
+     id INT NOT NULL,
+     email VARCHAR(100),
+     PRIMARY KEY(id)
+     );
+
+
+ALTER TABLE supplier ADD CONSTRAINT fk_person_id FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE supplier ADD CONSTRAINT email_check CHECK(email LIKE '%_@%_.__%');
+
+
+CREATE TABLE purchase(
+    oid INT NOT NULL AUTO_INCREMENT,
+    date_pur DATE NOT NULL,
+    total_pur INT NOT NULL,
+    CONSTRAINT total_pos CHECK(total_pur>0),
+    PRIMARY KEY(oid)
+    );
+
+ALTER TABLE purchase AUTO_INCREMENT=2001;
+
+
+
+CREATE TABLE product(
+    pid INT NOT NULL AUTO_INCREMENT,
+    pname VARCHAR(100),
+    PRIMARY KEY(pid)
+     );
+
+ALTER TABLE product AUTO_INCREMENT=1001;
+
+CREATE TABLE stock(
+     pid INT NOT NULL,
+     pname VARCHAR(100) NOT NULL,
+     qty INT NOT NULL,
+     price INT NOT NULL,
+     FOREIGN KEY(pid) REFERENCES product(pid),
+     PRIMARY KEY(pid)
+     );
+
+ALTER TABLE stock ADD CONSTRAINT pos CHECK(qty>=0 AND price>0);
+
+
+CREATE TABLE order_table(
+    oid INT NOT NULL,
+    pid INT NOT NULL,
+    qty INT NOT NULL,
+    price INT NOT NULL,
+    PRIMARY KEY(oid,pid),
+    FOREIGN KEY(oid) REFERENCES purchase(oid),
+    FOREIGN KEY(pid) REFERENCES product(pid)
+    );
+
+
+ALTER TABLE order_table ADD CONSTRAINT pos_order CHECK(qty>=0 AND price>0);
+
+
+
+CREATE TABLE bill(
+     bill_no INT NOT NULL AUTO_INCREMENT,
+     bill_date DATE NOT NULL,
+     bill_total INT NOT NULL,
+     PRIMARY KEY(bill_no)
+     );
+
+
+
+
+ALTER TABLE bill AUTO_INCREMENT=3001;
+
+
+
+CREATE TABLE items(
+     bill_no INT NOT NULL,
+     pname VARCHAR(100) NOT NULL,
+     qty INT NOT NULL,
+     price INT NOT NULL,
+     PRIMARY KEY(bill_no,pname,price),
+     FOREIGN KEY(bill_no) REFERENCES bill(bill_no)
+     );
+
+
+ALTER TABLE items ADD CONSTRAINT pos_items CHECK(qty>=0 AND price>0);
+
+
+
+
+
