@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Supplier</title>
+
+     <script type="text/javascript">
+        submit(){
+
+              alert("Employee added Successfully");
+       }
+
+    </script>
+
+
+    <style>
+
+      @import "bourbon";
+
+$bezier: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$time: 300ms;
+
+$base-font-family: "Avenir Next", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@mixin animated(
+  $time: 300ms,
+  $fillmode: both,
+  $count: 1) {
+  animation-duration: $time;
+  animation-fill-mode: $fillmode;
+  animation-iteration-count: $count;
+}
+
+body {
+  background-color: #363E4A;
+  font-family: $base-font-family;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: "Texta", $base-font-family;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 24px;
+  color: rgba(255, 255, 255, .4);
+}
+
+.container {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px 16px 40px 16px;
+
+  text-align: center;
+}
+
+.form-footer {
+  margin-top: 1em;
+}
+
+.ui-input {
+  position: relative;
+  padding: 0;
+  border: 0;
+}
+
+.ui-input input {
+  border: 0;
+  background: none;
+  padding: 16px 0 16px 0;
+  font-size: 24px;
+  outline: 0;
+  width: 100%;
+  tap-highlight-color: rgba(0,0,0,0);
+  touch-callout: none;
+}
+
+.ui-input input + label {
+  position: relative;
+  display: block;
+  padding: 8px 0 8px 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .0875em;
+  font-weight: 500;
+  text-align: left;
+
+  &::before, &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 1px;
+  }
+
+  &::before {
+    background-color: rgba(255, 255, 255, .2);
+  }
+
+  &::after {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $time $bezier;
+    background-color: #6EB1FF;
+    height: 2px;
+  }
+
+  span {
+    position: relative;
+    color: rgba(255, 255, 255, .2);
+    transition: color $time $bezier;
+
+    &::after {
+      content: attr(data-text);
+      position: absolute;
+      overflow: hidden;
+      left: 0;
+      transform: scaleX(1);
+      white-space: nowrap;
+      color: #fff;
+
+      background-image: linear-gradient(to right,
+          #4A90E2 50%,
+          rgba(255,255,255,0) 0%);
+      background-position: 100% 50%;
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      backface-visibility: hidden;
+      perspective: 1000;
+      transform: translateZ(0);
+
+      transition: background-position $time $bezier;
+    }
+  }
+}
+
+.ui-input input:focus,
+.ui-input input.error,
+.ui-input input:invalid,
+.ui-input input.filled {
+
+  & + label {
+
+    &::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    span::after {
+      //color: #4A90E2;
+      background-image: linear-gradient(to right,
+      rgba(255,255,255,1) 50%,
+      rgba(255,255,255,0) 0%);
+      background-position: 0% 50%;
+    }
+  }
+}
+
+.ui-input input.filled {
+  color: #ffffff;
+
+  & + label {
+
+    &::after {
+      background-color: #ffffff;
+    }
+
+    span::after {
+      background-image: linear-gradient(to right,
+        #ffffff 50%,
+        rgba(255,255,255,0) 0%);
+      background-position: 0% 50%;
+    }
+  }
+}
+
+.ui-input input:focus {
+  color: #6EB1FF;
+
+  & + label {
+
+    &::after {
+      background-color: #6EB1FF;
+    }
+
+    span::after {
+      background-image: linear-gradient(to right,
+        #6EB1FF 50%,
+        rgba(255,255,255,0) 0%);
+      background-position: 0% 50%;
+    }
+  }
+}
+
+.ui-input input.error,
+.ui-input input:invalid {
+  color: #E66161;
+
+  & + label {
+
+    &::after {
+      background-color: #E66161;
+    }
+
+    span::after {
+      background-image: linear-gradient(to right,
+        #E66161 50%,
+        rgba(255,255,255,0) 0%);
+      background-position: 0% 50%;
+    }
+  }
+}
+
+.btn {
+  border: 0;
+  background-color: #50617A;
+  padding: 18px 30px 18px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: .0875em;
+  font-weight: 500;
+  border-radius: 100px;
+  outline: 0;
+  transition: background-color $time $bezier,
+              color $time $bezier;
+}
+
+.btn:focus,.btn:active,
+.btn:hover {
+  background-color: #6EB1FF;
+  color: white;
+}
+
+.__first, .__second, .__third, .__fourth {
+  animation-name: fadeIn;
+  animation-duration: 180ms;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.__first { animation-delay: 0; }
+.__second { animation-delay: 80ms; }
+.__third { animation-delay: 180ms; }
+.__fourth { animation-delay: 360ms; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -25%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+    </style>
+</head>
+<body>
+
+<div class="container" >
+  <h1>Pencils Stationery Shop</h1>
+  <h2>Add  New  Supplier</h2>
+  <form class="form" action="" method="post">
+
+    <fieldset class="form-fieldset ui-input __first">
+      <input type="text" id="firstname" name="fname" tabindex="0" required/>
+      <label for="firstname">
+        <span data-text="Username">First Name</span>
+      </label>
+    </fieldset>
+
+
+     <fieldset class="form-fieldset ui-input __first">
+      <input type="text" id="middlename" name="mname" tabindex="0"  required/>
+      <label for="middlename">
+        <span data-text="Username">Middle Name</span>
+      </label>
+    </fieldset>
+
+     <fieldset class="form-fieldset ui-input __first">
+      <input type="text" id="lastname" name="lname" tabindex="0" required/>
+      <label for="lastname">
+        <span data-text="Username">Last Name</span>
+      </label>
+    </fieldset>
+
+
+
+
+    <fieldset class="form-fieldset ui-input __second">
+      <input type="email" id="email" name="email" tabindex="0" required/>
+      <label for="email">
+        <span data-text="E-mail Address">E-mail Address</span>
+      </label>
+    </fieldset>
+
+
+       <fieldset class="form-fieldset ui-input __first">
+      <input type="text" id="ph" name="ph_number" tabindex="0"required />
+      <label for="ph">
+        <span data-text="Username">Contact Number</span>
+      </label>
+    </fieldset>
+
+
+    <div class="form-footer">
+      <input type="submit" class="btn" onsubmit="submit()" value="Create Account" />
+    </div>
+
+  </form>
+      <br>
+      <div class="form-footer">
+        <a href="/home/" class="btn" style="color:black;">Home</a>
+    </div>
+</div>
+
+
+</body>
+</html>

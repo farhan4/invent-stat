@@ -14,25 +14,13 @@ var index = 1;
 
 
                 var cell2=row.insertCell(1);
-                var t2=document.createElement("select");
+                var t2=document.createElement("input");
                     t2.name = "product_name" + index.toString();
-                    t2.innerHTML='{% for item in items %}<option>{{  item.pname  }}</option>{% endfor %}';
                     t2.id = "txtAge"+index;
                     cell2.appendChild(t2);
 
 
-                var cell3=row.insertCell(2);
-                var t3=document.createElement("input");
-                    t3.id = "txtGender"+index;
-                    t3.name = "qty" + index.toString();
-                    cell3.appendChild(t3);
 
-
-                var cell4=row.insertCell(3);
-                var t4=document.createElement("input");
-                    t4.id = "txtOccupation"+index;
-                    t4.name = "price" + index.toString();
-                    cell4.appendChild(t4);
           index++;
     }
     function removeRow(){
@@ -48,23 +36,7 @@ var index = 1;
 
     }
 
-    function setTotal(){
-      var i=1;
-      var temp=document.getElementById('price1').value;
-      var total=0;
-      if(temp == ""){
-         document.getElementById('price1').value=0;
-         total=0;
-         }
-      else
-         total=parseInt(document.getElementById('price1').value)*parseInt(document.getElementById('qty1').value);
-      for(i=1;i<index;i++){
-        if(document.getElementById("txtOccupation"+i).value=="")
-           document.getElementById("txtOccupation"+i).value=0;
-        total+=parseInt(document.getElementById("txtOccupation"+i).value)*parseInt(document.getElementById("txtGender"+i).value);
-        }
-      document.getElementById('total').value = total;
-    }
+
 
 
 </script>
@@ -156,17 +128,10 @@ a{
 <a href="/" style="color:blue;"><h1><i>Log Out</i></h1></a>
 </div>
 <form  action="" method="post">
-<div align="center">
-
-    <br><br>
-    Date <input type="date" name="date">
-</div>
     <br>
     <div align="center">
  <input type="button" onclick="insertRow()" value="Add">
  <input type="button" onclick="removeRow()" value="Remove">
-  <input type ="button" style="position : absolute; left:780; font-size:16px"  value="Display Total" onclick="setTotal()">
- <input type = "text" style="position : absolute; left:900; font-size:16px"  id ="total" name="total" required>
     </div>
     <br>
     <br>
@@ -175,20 +140,16 @@ a{
 
         <th>No.</th>
         <th>Product Name</th>
-            <th>Qty</th>
-            <th>Price</th>
 
         <tr>
             <td ></td>
-            <td><select name="product_name0" id ="sel" required>{% for item in items %}<option>{{  item.pname  }}</option>{% endfor %}</select></td>
-            <td><input type="text"  id ="qty1" name ="qty0" required></td>
-             <td><input type="text"  id ="price1" name ="price0" required></td>
+            <td><input type="text"  id ="pname" name ="product_name0" required></td>
         </tr>
 
 </table>
  <br>
 <div align="center">
-<button type="submit"   class="button-three">Submit</button>
+<button type="submit"   class="button-three">Add Products</button>
 </div>
 </form>
 

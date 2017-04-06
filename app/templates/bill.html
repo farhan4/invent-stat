@@ -67,7 +67,6 @@ var index = 1;
     }
 
 
-
 </script>
 <style>
 td{
@@ -93,6 +92,15 @@ body {
         }
 
 
+
+
+
+
+
+
+
+
+
 </style>
 </head>
  <div align="center">
@@ -109,7 +117,7 @@ body {
     <div align="center">
  <input type="button" id="btnAdd" class="button-add" onClick="insertRow()" value="Add">
  <input type="button" id="btnRemove" class="button-remove" onClick="removeRow()" value="Remove">
- <input type ="button"style="position : absolute; left:780; font-size:16px"  value="Display Total"onclick="setTotal()">
+ <input type ="button" style="position : absolute; left:780; font-size:16px"  value="Display Total" onclick="setTotal()">
  <input type = "text" style="position : absolute; left:900; font-size:16px"  id ="total" name="total" required>
 
 </div>
@@ -132,4 +140,5 @@ body {
  <br>
 
 </form>
+<p align="center" style="color:red;">{{ error }}</p>
 </html>
